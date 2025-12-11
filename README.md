@@ -1,6 +1,6 @@
 # Nutrition Dataset Cleaning & Preprocessing in Python
 
-This project presents a complete end-to-end cleaning and preprocessing workflow for a large, inconsistent nutrition dataset using Python and Jupyter Notebook.  
+This project presents a complete end to end cleaning and preprocessing workflow for a large, inconsistent nutrition dataset using Jupyter Notebook.  
 The dataset originally stored nutrient values as *text mixed with units* (e.g., “7 g”, “30 mg”), making numeric analysis impossible.  
 This project converts it into a **fully numeric, standardized, analysis-ready dataset**.
 
