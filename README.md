@@ -2,7 +2,7 @@
 
 This project presents a complete end to end cleaning and preprocessing workflow for a large, inconsistent nutrition dataset using Jupyter Notebook.  
 The dataset originally stored nutrient values as *text mixed with units* (e.g., “7 g”, “30 mg”), making numeric analysis impossible.  
-This project converts it into a **fully numeric, standardized, analysis-ready dataset**.
+This project converts it into a **fully numeric, standardized, analysis ready dataset**.
 
 ---
 
@@ -11,8 +11,8 @@ This project converts it into a **fully numeric, standardized, analysis-ready da
 - Dataset Description  
 - Technologies Used  
 - Cleaning Challenges  
-- Step-by-Step Workflow  
-- Egg Sub-Analysis Example  
+- Step by Step Workflow  
+- Egg Sub Analysis Example  
 - Quality Checks  
 - Files Included  
 - How to Run This Project  
@@ -28,11 +28,11 @@ The nutrition dataset contained thousands of food items with nutrient values sto
 The primary goal was to:
 
 1. Extract units correctly  
-2. Clean and convert all values to floating-point numbers  
+2. Clean and convert all values to floating point numbers  
 3. Standardize column names  
 4. Handle missing values  
 5. Create a reproducible preprocessing pipeline  
-6. Export a clean dataset ready for analysis or machine-learning tasks  
+6. Export a clean dataset ready for analysis or machine learning tasks  
 
 The final cleaned file is exported as:
 
@@ -45,7 +45,7 @@ The final cleaned file is exported as:
 The raw dataset includes:
 
 - **7,889 rows**  
-- **77 nutrient-related columns**  
+- **77 nutrient related columns**  
 - Nutrient groups: minerals, vitamins, fats, amino acids, sugars, carbs, proteins, and more  
 - A `name` column representing each food item  
 
@@ -61,7 +61,6 @@ The raw dataset includes:
 
 ## Technologies Used
 
-- **Python 3**  
 - **Pandas**  
 - **NumPy**  
 - **Jupyter Notebook**
@@ -89,7 +88,7 @@ Examples:
 Some nutrient fields were incomplete and required imputation.
 
 ### 4. Subsetting a Category  
-Egg-related foods needed to be filtered for an additional demonstration.
+Egg related foods needed to be filtered for an additional demonstration.
 
 ---
 
@@ -99,10 +98,13 @@ Egg-related foods needed to be filtered for an additional demonstration.
 ```python
 import pandas as pd
 import numpy as np
+```
 
 ### 2. Load Dataset
 
+```python
 df = pd.read_csv("nutrition.csv")
+```
 
 ### 3. Remove Unnecessary Columns
 
@@ -110,14 +112,18 @@ Dropped columns:
 	•	serving_size
 	•	unnamed index-like columns
 
+```python
 df = df.loc[:, ~df.columns.str.contains("unnamed", case=False)]
 df = df.drop(columns=["serving_size"], errors="ignore")
+```
 
 ### 4. Extract Units From a Complete Row
 
 Row 24 was selected as a fully populated reference row.
-sample_row = df.iloc[24]
 
+```python
+sample_row = df.iloc[24]
+```
 
 ### 5. Create New Column Names With Units
 
@@ -130,7 +136,9 @@ Examples:
 
 Converted text values like "7 mg" to 7.0.
 
+```python
 df[col] = df[col].str.replace("[A-Za-z]", "", regex=True).astype(float)
+```
 
 ### 7. Convert Entire Dataset to Numeric Format
 
@@ -138,18 +146,24 @@ All nutrient columns converted to numeric (float64).
 
 ### 8. Subset Egg-Related Foods
 
+```python
 df["name"] = df["name"].str.lower()
 eggs = df[df["name"].str.contains("egg", regex=True)]
+```
 
 ### 9. Handle Missing Values (Egg Subset Example)
 
+```python
 eggs["saturated_fat_g"].fillna(eggs["saturated_fat_g"].median(), inplace=True)
+```
 
 ### 10. Export Final Cleaned Dataset
 
+```python
 df.to_excel("cleaned_nutrition.xlsx", index=False)
+```
 
-## Egg Sub-Analysis Example
+## Egg Sub Analysis Example
 
 The egg subset contains 155 rows.
 
@@ -165,6 +179,7 @@ The egg subset contains 155 rows.
 ## Quality Checks
 
 Before export, the following validations were performed:
+	
 	•	Dataset shape confirmed as (7889, 75)
 	•	Verified all nutrient fields are numeric
 	•	Ensured all values contain no alphabetic characters
@@ -176,7 +191,6 @@ Before export, the following validations were performed:
 ## Files Included
 	•	nutrition.csv — raw dataset
 	•	nutrition.ipynb — full preprocessing notebook
-	•	nutrition.xlsx — intermediate working file
 	•	cleaned_nutrition.xlsx — final processed dataset
 
 ⸻
@@ -190,25 +204,30 @@ Before export, the following validations were performed:
 cleaned_nutrition.xlsx
 
 ## Future Enhancements
-	•	Automated unit detection module
-Identify units even when inconsistent across rows.
-	•	Predictive modeling
-Use machine learning to estimate missing nutrient values.
-	•	Visualization module
-Add histograms, distribution plots, and nutrient comparison charts.
-	•	API-ready formatting
-Convert cleaned data into a structured format for nutrition apps.
-	•	Unit-conversion automation
-Convert all nutrients to a single scale (e.g., everything to grams).
+
+	•	Automated unit detection module:
+	Identify units even when inconsistent across rows.
+	
+	•	Predictive modeling: 
+	Use machine learning to estimate missing nutrient values.
+	
+	•	Visualization module:
+	Add histograms, distribution plots, and nutrient comparison charts.
+	
+	•	API ready formatting:
+	Convert cleaned data into a structured format for nutrition apps.
+	•	Unit-conversion automation:
+	Convert all nutrients to a single scale (e.g., everything to grams).
 
 ⸻
 
 ## Conclusion & Next Steps
 
-This project successfully transformed a large, messy, unit-mixed dataset into a clean, numeric, standardized file ready for serious analysis.
+This project successfully transformed a large, messy, unit mixed dataset into a clean, numeric, standardized file ready for serious analysis.
 All preprocessing steps were automated to ensure reproducibility, reliability, and scalability.
 
 With this foundation, the dataset can now support:
+	
 	•	Nutrient analysis dashboards
 	•	Statistical modeling
 	•	Clustering of similar foods
@@ -218,11 +237,11 @@ With this foundation, the dataset can now support:
 ⸻
 
 ## What This Project Demonstrates
-	•	Strong data-cleaning skills using Pandas
+	•	Strong data cleaning skills using Pandas
 	•	Regex proficiency for extracting units
-	•	End-to-end pipeline creation
+	•	End to end pipeline creation
 	•	Clean dataset export for business or ML use
-	•	Ability to handle large, inconsistent real-world data
+	•	Ability to handle large, inconsistent real world data
 
 
 
